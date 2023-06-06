@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { MongoParseIdPipe } from 'src/common/pipes/mongo-parse-id/mongo-parse-id.pipe';
+import { PaginatedDto } from 'src/common/dto/paginated.dto';
 
 @Controller('pokemon')
 export class PokemonController {
@@ -15,8 +16,8 @@ export class PokemonController {
   }
 
   @Get()
-  findAll() {
-    return this.pokemonService.findAll();
+  findAll(@Query() paginatedDto:PaginatedDto) {
+    return this.pokemonService.findAll(paginatedDto);
   }
 
   /*reemplazamos el nombre 'id' por 'term', porque al buscar por 'id', o 'name' o 'no'

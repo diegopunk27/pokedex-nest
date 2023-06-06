@@ -12,6 +12,11 @@ async function bootstrap() {
     new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true,
+    /* transform y transformOptions transforman los numeros( que son string ) de una query string en numeros enteros */
+    transform:true,
+    transformOptions:{
+      enableImplicitConversion:true
+    }
     })
   );
 
